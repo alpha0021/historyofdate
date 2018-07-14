@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Date Facts</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+	<style>
+		#fact{
+			display:none;
+		}
+	</style>
+</head>
+<body class="bg-info">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9 mx-auto">
+				<div class="class bg-secondary text-black mt-5 p-4">
+					<h1>Date Facts</h1>
+					<p>Enter a date and  know what is the story of it</p>
+					<input type="text" type="input"  placeholder="mm/dd" class="form-control form-control-lg" id="dateInput" placeholder="enter the date ">
+					<div id="fact" class="card-body">
+						<h4 class="card-title">
+							Date Fact
+						</h4>
+						<p id="factText" class="card-text"></p>
+					</fact>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script>
+		let fact = document.querySelector('#fact');
+		let factText =  document.querySelector('#factText');
+		let dateInput = document.querySelector('#dateInput');
+
+		dateInput.addEventListener('input',getFactAjax);
+	  
+
+		//numberInput.addEventListener('input',getFactFetch);
+		
+		function getFactAjax(){
+			let date =  dateInput.value;
+
+			let xhr = new XMLHttpRequest();
+			xhr.open('GET', 'http://numbersapi.com/' + date);
+
+			xhr.onload = function(){
+				if(this.status == 200 && date != ''){
+					fact.style.display = 'block';
+					factText.innerText = this.responseText;
+				}
+			}
+
+			xhr.send();
+		}
+
+	</script>
+
+
+</body>
+</html>
